@@ -1,17 +1,17 @@
 import { createHashHistory } from "history";
 import { applyMiddleware, createStore } from "redux";
-import { routerMiddleware } from "connected-react-router";
-import { composeWithDevTools } from "redux-devtools-extension";
 import createRootReducer from "./reducers/rootReducer";
 import thunk from "redux-thunk";
 
+export const middlewares = [thunk];
 export const history = createHashHistory();
 
 const preloadedState = {};
 
-const store = createStore(
+const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
+
+export default createStoreWithMiddleware(
   createRootReducer(history),
   preloadedState,
-  composeWithDevTools(applyMiddleware(routerMiddleware(history), thunk))
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-export default store;

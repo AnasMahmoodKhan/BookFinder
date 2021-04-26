@@ -24,3 +24,5 @@ export const books = (state = initalState, action) => {
       return state;
   }
 };
+
+export default books;
