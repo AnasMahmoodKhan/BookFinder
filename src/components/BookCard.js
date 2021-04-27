@@ -5,7 +5,10 @@ import Card from "react-bootstrap/Card";
 const BookCard = ({ book }) => {
   let { title, subtitle, imageLinks, description } = book.volumeInfo;
   return (
-    <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-2 text-center">
+    <div
+      className="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-2 text-center"
+      data-test="BookCard"
+    >
       <Card>
         {imageLinks ? (
           <Card.Img variant="top" src={imageLinks.thumbnail} />

@@ -1,14 +1,13 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { findByTestAttr, storeFactory } from "../../test/testUtils";
+import { findByTestAttr } from "../../test/testUtils";
 import Header from "./Header";
 import Footer from "./Footer";
 
 describe("Header Component", () => {
   let wrapper;
   beforeEach(() => {
-    const store = storeFactory({});
-    wrapper = shallow(<Header store={store} />);
+    wrapper = shallow(<Header />);
   });
 
   test("should render component without error", () => {
@@ -24,8 +23,7 @@ describe("Header Component", () => {
 
 describe("Footer Component", () => {
   test("should render component without error", () => {
-    const store = storeFactory({});
-    const wrapper = shallow(<Footer store={store} />);
+    const wrapper = shallow(<Footer />);
     const component = findByTestAttr(wrapper, "Footer");
     expect(component).toHaveLength(1);
   });
