@@ -1,14 +1,14 @@
 import { applyMiddleware, createStore } from "redux";
 import checkPropTypes from "check-prop-types";
-import { middlewares } from "../src/configureStore";
+import { history, middlewares } from "../src/configureStore";
 
-import cartReducer from "../src/store/reducers/cart-reducer";
+import bookreducer from "../src/reducers/rootReducer";
 
 export const storeFactory = (initialState) => {
   const createStoreWithMiddleware = applyMiddleware(...middlewares)(
     createStore
   );
-  return createStoreWithMiddleware(cartReducer, initialState);
+  return createStoreWithMiddleware(bookreducer(history), initialState);
 };
 
 export const findByTestAttr = (wrapper, val) => {

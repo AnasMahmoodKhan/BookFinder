@@ -26,11 +26,11 @@ export const getBooks = (query) => {
           })
         );
       })
-      .catch((error) => {
+      .catch(() => {
         dispatch(
           receiveBooks({
             status: "error",
-            payload: error,
+            payload: "error",
           })
         );
       });
