@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import "./book.css";
 
 const createMarkup = (markup) => ({ __html: markup });
 
-const Book = ({ match: { params } }) => {
-  const [bookInfo, setBookInfo] = useState({});
-  const [isFetching, setIsFetching] = useState(false);
+const Book = ({
+  match: {
+    params: { ID },
+  },
+}) => {
+  const [bookInfo, setBookInfo] = React.useState({});
+  const [isFetching, setIsFetching] = React.useState(false);
   useEffect(() => {
     setIsFetching(true);
     axios
-      .get(`https://www.googleapis.com/books/v1/volumes/${params.ID}`)
+      .get(`https://www.googleapis.com/books/v1/volumes/${ID}`)
       .then((response) => {
         setBookInfo(response.data);
       })
@@ -21,7 +25,7 @@ const Book = ({ match: { params } }) => {
       .finally(() => {
         setIsFetching(false);
       });
-  }, [params.ID]);
+  }, [ID]);
 
   let jsxStr = "";
   if (isFetching) {
@@ -32,7 +36,7 @@ const Book = ({ match: { params } }) => {
     let { title, subtitle, imageLinks, description } = bookInfo.volumeInfo;
 
     jsxStr = (
-      <div className="book-card">
+      <div className="book-card" data-test="book-card">
         <h1>{title}</h1>
         <h3>{subtitle}</h3>
         <div className="book-card--body">
