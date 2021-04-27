@@ -12,7 +12,7 @@ const renderBooksList = (data, query) => {
     <>
       <h3>Search results for: {query}</h3>
       <p>Total results: {totalItems}</p>
-      <div className="books-list">
+      <div className="row">
         {books.map((book) => (
           <BookCard key={book.id} book={book} />
         ))}
@@ -31,7 +31,7 @@ const Books = ({ data, isFetching, query, error }) => {
   } else {
     jsxStr = renderBooksList(data, query);
   }
-  return <div className="books">{jsxStr}</div>;
+  return <div className="container">{jsxStr}</div>;
 };
 
 const mapStateToProps = (state) => {
