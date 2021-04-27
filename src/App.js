@@ -13,9 +13,9 @@ function App() {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <div className="app">
+        <div className="app" data-test="App">
           <Header />
-          <main>{routes}</main>
+          <main data-test="Routes">{routes}</main>
           <Footer />
         </div>
       </ConnectedRouter>
