@@ -41,7 +41,7 @@ const Books = ({ data, isFetching, query, error, getBookInfo }) => {
   } else {
     jsxStr = renderBooksList(data, query, getBookInfo);
   }
-  return <div className="container">{jsxStr}</div>;
+  return <div className="container" data-test="container">{jsxStr}</div>;
 };
 
 const mapStateToProps = (state) => {

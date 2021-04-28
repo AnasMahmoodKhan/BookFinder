@@ -31,7 +31,6 @@ describe("book component", () => {
       }),
       "book-card"
     );
-    console.log(component);
     expect(component).toHaveLength(1);
   });
 
@@ -44,7 +43,6 @@ describe("book component", () => {
       }),
       "loading"
     );
-    console.log(component);
     expect(component).toHaveLength(1);
     expect(component.text()).toEqual("Loading...");
   });
