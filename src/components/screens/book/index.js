@@ -1,34 +1,23 @@
 import React from "react";
-import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import "./book.css";
+import { connect } from "react-redux";
+import { getBookInfo } from "../../../actions/actions";
+import { bindActionCreators } from "redux";
 
 const createMarkup = (markup) => ({ __html: markup });
 
 const Book = ({
-  match: {
-    params: { ID },
-  },
+  getBookInfo,
+  bookInfo,
+  isFetchingBookInfo,
+  match: { params },
 }) => {
-  const [bookInfo, setBookInfo] = React.useState({});
-  const [isFetching, setIsFetching] = React.useState(false);
   React.useEffect(() => {
-    setIsFetching(true);
-    axios
-      .get(`https://www.googleapis.com/books/v1/volumes/${ID}`)
-      .then((response) => {
-        setBookInfo(response.data);
-      })
-      .catch(() => {
-        setBookInfo({});
-      })
-      .finally(() => {
-        setIsFetching(false);
-      });
-  }, [ID]);
-
+    getBookInfo(params.id);
+  }, [params]);
   let jsxStr = "";
-  if (isFetching) {
+  if (isFetchingBookInfo) {
     jsxStr = <p>Loading...</p>;
   }
 
@@ -64,4 +53,22 @@ const Book = ({
     </div>
   );
 };
-export default Book;
+
+const mapStateToProps = (state) => {
+  let { bookInfo, isFetchingBookInfo } = state.books;
+  return {
+    bookInfo,
+    isFetchingBookInfo,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      getBookInfo,
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Book);

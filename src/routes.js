@@ -6,6 +6,6 @@ import Home from "./components/screens/home/index";
 export default (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/book/:ID" component={Book} />
+    <Route path="/book/:id" component={Book} />
   </Switch>
 );
