@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import "./book.css";
@@ -12,7 +12,7 @@ const Book = ({
 }) => {
   const [bookInfo, setBookInfo] = React.useState({});
   const [isFetching, setIsFetching] = React.useState(false);
-  useEffect(() => {
+  React.useEffect(() => {
     setIsFetching(true);
     axios
       .get(`https://www.googleapis.com/books/v1/volumes/${ID}`)

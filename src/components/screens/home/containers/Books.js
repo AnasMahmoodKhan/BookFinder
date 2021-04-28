@@ -2,8 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import isEmpty from "lodash/isEmpty";
 import BookCard from "../../../BookCard";
+import { getBookInfo } from "../../../../actions/actions";
+import { bindActionCreators } from "redux";
 
-const renderBooksList = (data, query) => {
+const renderBooksList = (data, query, getBookInfo) => {
+  const ViewClickHandler = (ID) => {
+    getBookInfo(ID);
+  };
+
   if (isEmpty(data)) {
     return null;
   }
@@ -14,14 +20,18 @@ const renderBooksList = (data, query) => {
       <p>Total results: {totalItems}</p>
       <div className="row">
         {books.map((book) => (
-          <BookCard key={book.id} book={book} />
+          <BookCard
+            key={book.id}
+            book={book}
+            handleViewClick={ViewClickHandler}
+          />
         ))}
       </div>
     </>
   );
 };
 
-const Books = ({ data, isFetching, query, error }) => {
+const Books = ({ data, isFetching, query, error, getBookInfo }) => {
   let jsxStr = "";
 
   if (isFetching) {
@@ -29,7 +39,7 @@ const Books = ({ data, isFetching, query, error }) => {
   } else if (!isEmpty(error)) {
     jsxStr = JSON.stringify(error);
   } else {
-    jsxStr = renderBooksList(data, query);
+    jsxStr = renderBooksList(data, query, getBookInfo);
   }
   return <div className="container">{jsxStr}</div>;
 };
@@ -44,4 +54,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Books);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      getBookInfo,
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Books);

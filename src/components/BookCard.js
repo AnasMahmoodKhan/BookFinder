@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
-const BookCard = ({ book }) => {
+const BookCard = ({ book,handleViewClick }) => {
   let { title, subtitle, imageLinks, description } = book.volumeInfo;
   return (
     <div
@@ -17,7 +17,7 @@ const BookCard = ({ book }) => {
           <Card.Title>{title}</Card.Title>
           <Card.Subtitle>{subtitle}</Card.Subtitle>
           <Card.Text className="book--description">{description}</Card.Text>
-          <Link className="book" to={`/book/${book.id}`}>
+          <Link className="book" onClick={()=>handleViewClick(book.id)} to={`/book/${book.id}`}>
             View
           </Link>
         </Card.Body>
