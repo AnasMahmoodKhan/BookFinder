@@ -9,6 +9,9 @@ describe("reducer tests", () => {
       isFetching: false,
       data: {},
       error: "",
+      isFetchingBookInfo: false,
+      bookInfo: {},
+      errorBookInfo: "",
     };
   });
 

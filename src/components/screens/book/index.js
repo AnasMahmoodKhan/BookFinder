@@ -16,9 +16,10 @@ const Book = ({
   React.useEffect(() => {
     getBookInfo(params.id);
   }, [params]);
+
   let jsxStr = "";
   if (isFetchingBookInfo) {
-    jsxStr = <p>Loading...</p>;
+    jsxStr = <p data-test="loading">Loading...</p>;
   }
 
   if (!isEmpty(bookInfo)) {

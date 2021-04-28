@@ -1,30 +1,51 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { findByTestAttr } from "../../../../test/testUtils";
+import { findByTestAttr, storeFactory } from "../../../../test/testUtils";
 import Book from "./index";
 
+const mockBookInfo = {
+  volumeInfo: {
+    title: "abc",
+    subtitle: "xyz",
+    imageLinks: { thumbnail: "qwert" },
+    description: "qwerty",
+  },
+};
+const baseProps = { match: { params: { id: "YtKbtgAACAAJ" } } };
+
+const setup = (initialState = {}) => {
+  const store = storeFactory(initialState);
+  const wrapper = shallow(<Book store={store} {...baseProps} />)
+    .dive()
+    .dive();
+  return wrapper;
+};
+
 describe("book component", () => {
-  let wrapper;
-  let useEffect;
-
-  const mockUseEffect = () => {
-    useEffect.mockImplementationOnce((f) => f());
-  };
-
-  beforeEach(() => {
-    useEffect = jest.spyOn(React, "useEffect");
-
-    const props = {
-      match: { params: { ID: 3 } },
-    };
-
-    mockUseEffect();
-    wrapper = shallow(<Book {...props} />);
+  test("should render book component without error", () => {
+    const component = findByTestAttr(
+      setup({
+        books: {
+          bookInfo: mockBookInfo,
+        },
+      }),
+      "book-card"
+    );
+    console.log(component);
+    expect(component).toHaveLength(1);
   });
 
-  test("should render book component without error", () => {
-    const component = findByTestAttr(wrapper, "book-card");
-    console.log(wrapper.debug());
+  test("should render loading if the api call is await", () => {
+    const component = findByTestAttr(
+      setup({
+        books: {
+          isFetchingBookInfo: true,
+        },
+      }),
+      "loading"
+    );
+    console.log(component);
     expect(component).toHaveLength(1);
+    expect(component.text()).toEqual("Loading...");
   });
 });
