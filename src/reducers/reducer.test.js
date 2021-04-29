@@ -1,4 +1,9 @@
-import { RECEIVE_BOOKS, REQUEST_BOOKS } from "../actions/actionTypes";
+import {
+  RECEIVE_BOOKS,
+  RECEIVE_BOOK_INFO,
+  REQUEST_BOOKS,
+  REQUEST_BOOK_INFO,
+} from "../actions/actionTypes";
 import books from "./reducer";
 
 describe("reducer tests", () => {
@@ -58,6 +63,47 @@ describe("reducer tests", () => {
       ...initStore,
       isFetching: false,
       error: "err",
+    });
+  });
+
+  test('should return state of ID upon receiving an action of type "REQUEST_BOOK_INFO"', () => {
+    const newState = books(initStore, {
+      type: REQUEST_BOOK_INFO,
+      ID: "xi3ijq",
+    });
+
+    expect(newState).toStrictEqual({
+      ...initStore,
+      isFetchingBookInfo: true,
+      ID: "xi3ijq",
+    });
+  });
+
+  test('should return state of bookInfo upon receiving an action of type "RECIEVE_BOOK_INFO"', () => {
+    const newState = books(initStore, {
+      type: RECEIVE_BOOK_INFO,
+      status: "success",
+      payload: {},
+    });
+
+    expect(newState).toStrictEqual({
+      ...initStore,
+      isFetchingBookInfo: false,
+      data: {},
+    });
+  });
+
+  test('should return state of errorBookInfo upon receiving an action of type "RECIEVE_BOOK_INFO" success error', () => {
+    const newState = books(initStore, {
+      type: RECEIVE_BOOK_INFO,
+      status: "error",
+      payload: "err",
+    });
+
+    expect(newState).toStrictEqual({
+      ...initStore,
+      isFetchingBookInfo: false,
+      errorBookInfo: "err",
     });
   });
 });
