@@ -106,7 +106,7 @@ describe("test for actions dispatch", () => {
       });
     });
 
-    test("for getBooks api call when error", () => {
+    test("for getBook api call when error", () => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
@@ -133,7 +133,7 @@ describe("test for actions dispatch", () => {
       moxios.uninstall();
     });
 
-    test("for getBooks api call when success", () => {
+    test("for getBookInfo api call when success", () => {
       const data = [
         {
           name: "abc",
@@ -158,7 +158,7 @@ describe("test for actions dispatch", () => {
       });
     });
 
-    test("for getBooks api call when error", () => {
+    test("for getBookInfo api call when error", () => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({

@@ -1,5 +1,10 @@
-import axios from "axios";
-import { REQUEST_BOOKS, RECEIVE_BOOKS, REQUEST_BOOK_INFO, RECEIVE_BOOK_INFO } from "./actionTypes";
+import API from "../utils/API";
+import {
+  REQUEST_BOOKS,
+  RECEIVE_BOOKS,
+  REQUEST_BOOK_INFO,
+  RECEIVE_BOOK_INFO,
+} from "./actionTypes";
 
 export const requestBooks = (query) => ({
   type: REQUEST_BOOKS,
@@ -23,13 +28,10 @@ export const receiveBookInfo = ({ status, payload }) => ({
   payload,
 });
 
-
 export const getBooks = (query) => {
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch(requestBooks(query));
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
-    return axios
-      .get(url)
+    await API.fetchBooks(query)
       .then((response) => {
         dispatch(
           receiveBooks({
@@ -49,13 +51,10 @@ export const getBooks = (query) => {
   };
 };
 
-
 export const getBookInfo = (ID) => {
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch(requestBookInfo(ID));
-    const url = `https://www.googleapis.com/books/v1/volumes/${ID}`;
-    return axios
-      .get(url)
+    await API.fetchBookInfo(ID)
       .then((response) => {
         dispatch(
           receiveBookInfo({
