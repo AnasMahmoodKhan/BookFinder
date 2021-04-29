@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { findByTestAttr } from "../../test/testUtils";
-import BookCard from "./BookCard";
+import BookCard from "../components/BookCard";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 

@@ -8,13 +8,13 @@ import {
   receiveBooks,
   requestBookInfo,
   requestBooks,
-} from "./actions";
+} from "../actions/actions";
 import {
   RECEIVE_BOOKS,
   RECEIVE_BOOK_INFO,
   REQUEST_BOOKS,
   REQUEST_BOOK_INFO,
-} from "./actionTypes";
+} from "../actions/actionTypes";
 
 describe("test for actions dispatch", () => {
   let store;

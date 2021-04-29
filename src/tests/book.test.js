@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { findByTestAttr, storeFactory } from "../../../../test/testUtils";
-import Book from "./index";
+import { findByTestAttr, storeFactory } from "../../test/testUtils";
+import Book from "../components/screens/book/index";
 
 const mockBookInfo = {
   volumeInfo: {

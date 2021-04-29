@@ -4,7 +4,7 @@ import {
   REQUEST_BOOKS,
   REQUEST_BOOK_INFO,
 } from "../actions/actionTypes";
-import books from "./reducer";
+import books from "../reducers/reducer";
 
 describe("reducer tests", () => {
   let initStore;

@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { findByTestAttr } from "../../test/testUtils";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 describe("Header Component", () => {
   let wrapper;
