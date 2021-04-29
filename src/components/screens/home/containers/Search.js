@@ -19,12 +19,13 @@ const Search = ({ getBooks, query }) => {
   };
 
   return (
-    <div className="search-books">
+    <div className="search-books" data-test="search-books">
       <Form className="search-books--form" onSubmit={handleOnSubmit}>
         <Form.Group controlId="formBasicEmail">
           <Form.Control
             type="text"
             onChange={onInputChange}
+            data-test="input"
             placeholder="Harry Potter, Food and Love"
           />
           <Form.Text className="text-muted">
@@ -39,7 +40,7 @@ const Search = ({ getBooks, query }) => {
   );
 };
 
-const mapStateToProps = (state /*, ownProps*/) => {
+const mapStateToProps = (state) => {
   return {
     query: state.books.query,
   };
